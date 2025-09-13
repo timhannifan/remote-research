@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from anthropic import Anthropic
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
+from mcp.client.sse import sse_client
 from contextlib import AsyncExitStack
 import json
 import asyncio
@@ -12,7 +13,7 @@ nest_asyncio.apply()
 
 load_dotenv()
 
-PATH_TO_SERVER_CONFIG = Path(__file__).parent.parent / "server_config.json"
+PATH_TO_SERVER_CONFIG = Path(__file__).parent / "server_config.json"
 
 class MCP_ChatBot:
     def __init__(self):
@@ -27,16 +28,19 @@ class MCP_ChatBot:
 
     async def connect_to_server(self, server_name, server_config):
         try:
-            server_params = StdioServerParameters(**server_config)
-            stdio_transport = await self.exit_stack.enter_async_context(
-                stdio_client(server_params)
-            )
-            read, write = stdio_transport
-            session = await self.exit_stack.enter_async_context(
-                ClientSession(read, write)
-            )
+        # Prefer SSE if explicitly configured, or if this is the "research" server
+            if server_name == "research" or "sseUrl" in server_config:
+                url = server_config.get("sseUrl", "https://remote-research-noke.onrender.com/sse")
+                read, write = await self.exit_stack.enter_async_context(sse_client(url=url))
+            else:
+                params = StdioServerParameters(
+                    command=server_config["command"],
+                    args=server_config.get("args", [])
+                )
+                read, write = await self.exit_stack.enter_async_context(stdio_client(params))
+
+            session = await self.exit_stack.enter_async_context(ClientSession(read, write))
             await session.initialize()
-            
             
             try:
                 # List available tools
