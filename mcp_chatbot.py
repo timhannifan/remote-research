@@ -28,9 +28,9 @@ class MCP_ChatBot:
 
     async def connect_to_server(self, server_name, server_config):
         try:
-        # Prefer SSE if explicitly configured, or if this is the "research" server
-            if server_name == "research" or "sseUrl" in server_config:
-                url = server_config.get("sseUrl", "https://remote-research-noke.onrender.com/sse")
+            # Prefer SSE if explicitly configured
+            if "sse_url" in server_config:
+                url = server_config.get("sse_url")
                 read, write = await self.exit_stack.enter_async_context(sse_client(url=url))
             else:
                 params = StdioServerParameters(
@@ -167,7 +167,7 @@ class MCP_ChatBot:
         for prompt in self.available_prompts:
             print(f"- {prompt['name']}: {prompt['description']}")
             if prompt['arguments']:
-                print(f"  Arguments:")
+                print("  Arguments:")
                 for arg in prompt['arguments']:
                     arg_name = arg.name if hasattr(arg, 'name') else arg.get('name', '')
                     print(f"    - {arg_name}")

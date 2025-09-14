@@ -9,7 +9,7 @@ To run the chatbot:
 uv run mcp_chatbot.py
 ```
 
-Sample query: `Search for papers on parallel agents`
+Sample query: Search for papers on parallel agents."
 
 Then thy the following:
 - @folders
@@ -18,5 +18,5 @@ Then thy the following:
 - /prompt generate_search_prompt topic=history num_papers=2
 
 
-
+Alternatively: "Find a paper on MCP architecture best practices and write a summary to a md file"
 

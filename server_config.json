@@ -9,10 +9,9 @@
                 "."
             ]
         },
-        
+
         "research": {
-            "command": "uv",
-            "args": ["run", "research_server.py"]
+            "sse_url": "https://remote-research-noke.onrender.com/sse"
         },
         
         "fetch": {
