@@ -1,3 +1,6 @@
+# remote-research
+
+A complete implementation from this course https://learn.deeplearning.ai/courses/mcp-build-rich-context-ai-apps-with-anthropic.
 
 To use `inspector`:
 ```bash
