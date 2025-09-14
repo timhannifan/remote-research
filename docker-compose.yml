@@ -1,0 +1,38 @@
+services:
+  # MCP Research Server - provides research tools
+  research-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.research-server
+    ports:
+      - "10000:10000"
+    environment:
+      - PORT=10000
+    volumes:
+      - ./papers:/app/papers
+    networks:
+      - mcp-network
+
+  # Main MCP Chatbot
+  chatbot:
+    build:
+      context: .
+      dockerfile: Dockerfile.chatbot
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    volumes:
+      - ./:/app
+    depends_on:
+      - research-server
+    networks:
+      - mcp-network
+    stdin_open: true
+    tty: true
+    command: python src/mcp_chatbot.py
+
+networks:
+  mcp-network:
+    driver: bridge
+
+volumes:
+  papers-data:

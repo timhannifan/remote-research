@@ -1,0 +1,47 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Environment files
+.env
+.env.*
+
+# Docker files
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Build artifacts
+output/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.pytest_cache/
+
+# Node.js (for any local node_modules)
+node_modules/
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
