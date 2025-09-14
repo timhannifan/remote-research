@@ -13,7 +13,7 @@ nest_asyncio.apply()
 
 load_dotenv()
 
-PATH_TO_SERVER_CONFIG = Path(__file__).parent / "server_config.json"
+PATH_TO_SERVER_CONFIG = Path(__file__).parent.parent / "server_config.json"
 
 class MCP_ChatBot:
     def __init__(self):

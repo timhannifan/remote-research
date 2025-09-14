@@ -1,0 +1,9 @@
+services:
+  chatbot:
+    volumes:
+      # Use Docker-specific server config
+      - ./server_config.docker.json:/app/server_config.json
+      # Mount source code for development
+      - ./mcp_chatbot.py:/app/mcp_chatbot.py
+    environment:
+      - PYTHONUNBUFFERED=1
