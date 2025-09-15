@@ -1,29 +1,28 @@
 {
     "mcpServers": {
-        
         "filesystem": {
             "command": "npx",
             "args": [
                 "-y",
                 "@modelcontextprotocol/server-filesystem",
-                "."
+                "./output"
             ]
         },
 
         "research": {
-            "sse_url": "https://remote-research-noke.onrender.com/sse"
+            "sse_url": "http://research-server:10000/sse"
         },
         
         "fetch": {
-            "command": "uvx",
-            "args": ["mcp-server-fetch"]
+            "command": "/usr/local/bin/uv",
+            "args": ["tool", "run", "mcp-server-fetch"]
         },
 
         "markdownify": {
             "command": "node",
             "args": [
-              "/Users/hannifan/work/mcpservers/markdownify-mcp/dist/index.js"
+                "/opt/markdownify-mcp/dist/index.js"
             ]
-          }
+        }
     }
 }

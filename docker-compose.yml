@@ -20,6 +20,7 @@ services:
       dockerfile: Dockerfile.chatbot
     environment:
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - PYTHONUNBUFFERED=1
     volumes:
       - ./:/app
     depends_on:

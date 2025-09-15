@@ -22,6 +22,20 @@ MCP servers connected:
 - `fetch` - Web fetching capabilities (uvx mcp-server-fetch)
 - `markdownify` - File conversion to Markdown (PDF, images, audio, etc.)
 
+## Configuration
+
+The default configuration uses Docker with local services. The research server is also deployed to Render and available at: `https://remote-research-noke.onrender.com/sse`
+
+### Using Remote Research Server (Alternative)
+
+If you want to use the remote research server instead of the local Docker one, update `server_config.json`:
+
+```json
+"research": {
+    "sse_url": "https://remote-research-noke.onrender.com/sse"
+}
+```
+
 ## Running
 
 ```bash
@@ -31,7 +45,7 @@ make setup
 # Edit .env and add your ANTHROPIC_API_KEY
 # Get key from: https://console.anthropic.com/
 
-# Start services
+# Start services (uses local research server)
 make up
 
 # In another terminal, run the interactive chatbot
